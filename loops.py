@@ -91,7 +91,7 @@ for student in students:
     if student != "Hibo":
         email = student + "@gau.ac.ke" 
         student_emails.append(email)
-
+ 
 print(student_emails)
 
 
