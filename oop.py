@@ -25,13 +25,6 @@ class Student:
         else:
             self._grade = grade
     
-    def del_grade(self):
-        print("delting garde")
-        del self._grade
-
-    grade = property(get_grade ,set_grade ,del_grade)
-
-
 
 
 student_1 = Student("abdi" ,"22" ,"B")
