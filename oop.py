@@ -1,5 +1,5 @@
 class Student:
-    """  this is a class student it has name, age and grade attributr """
+    """  this is a class student it has name, age and grade attribute """
     #class attribute
     university = "Garissa university"
     all_students = []
