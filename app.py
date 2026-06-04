@@ -1,22 +1,26 @@
-from flask import Flask, request
+from flask import Flask, request ,render_template
 
 app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return "Hello, World !"
+    return render_template('index.html')
 
 @app.route('/about')
 def about():
-    return "this is is the about page"
+    return render_template('about.html')
 
 @app.route('/contact')
 def contact():
     return "this is is the contact page"
 
-@app.route('/user/<user_name>')
+@app.route('/<user_name>')
 def show_profile(user_name):
     return f"welcome: {user_name}"
+
+@app.route('/courses/<string:course_name>/<int:course_id>')
+def display_course(course_name , course_id):
+    return f"welcome to {course_name} course with id: {course_id}"
 
 @app.route('/test_request')
 def test_request():
