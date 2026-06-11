@@ -35,12 +35,41 @@ def register_student():
 
     return jsonify(new_student.to_dict()),201
 
+@app.route('/students/<int:id>' , methods =['PUT'])
+def update_student(id):
+    data = request.get_json()
+    student = Student.query.filter(Student.id == id).first()
+    if not student:
+        return jsonify({"error" : "student not found"})
+    
+    student.name = data.get("name" , student.name)
+    student.email = data.get("email" , student.email)
+    student.course = data.get("course" ,student.course)
+    student.department = data.get("department" ,student.department)
+
+    db.session.commit()
+
+    return jsonify(student.to_dict()), 200
+
+@app.route('/students/<int:id>' , methods = ["DELETE"])
+def delete_student(id):
+    student = Student.query.filter(Student.id == id).first()
+    if not student:
+        return jsonify({"error": "student not found"})
+    
+    db.session.delete(student)
+    db.session.commit()
+    return jsonify({"message": "student deleted"}) , 200
 
 
 
 
 
 
+
+
+if __name__ == "__main__":
+    app.run(debug=True,port=5001)
 
 
 
@@ -112,5 +141,3 @@ def register_student():
 
 
 
-if __name__ == "__main__":
-    app.run(debug=True,port=5001)
