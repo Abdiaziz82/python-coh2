@@ -1,12 +1,15 @@
 from flask import Flask, request ,render_template ,jsonify
 from model import db ,Student
-
+from flask_cors import CORS
 app = Flask(__name__)
+
+CORS(app)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///university.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
+  
 
 @app.route('/students' ,methods= ["GET"])
 def get_students():
@@ -57,7 +60,7 @@ def delete_student(id):
     if not student:
         return jsonify({"error": "student not found"})
     
-    db.session.delete(student)
+    
     db.session.commit()
     return jsonify({"message": "student deleted"}) , 200
 
